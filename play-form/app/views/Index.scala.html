@@ -1,0 +1,35 @@
+@import views.formdata.BusinessFormData
+@(businessForm: Form[BusinessFormData],
+  methods:Map[String,Boolean],
+  levels:List[String],
+  period:Map[String,Boolean],
+  majors:Map[String,Boolean])
+
+@import helper._
+
+@Main("Index") {
+<div class="container">
+  <div class="well">
+
+    @form(routes.Application.postIndex(), 'class -> "form-horizontal") {
+      @fieldset(businessForm, methods, levels, period, majors)
+    }
+  </div>
+
+  @if(flash.containsKey("success")) {
+  <div class="well">
+    <div id="success-message" class="text-success">
+      @flash.get("success")
+    </div>
+  </div>
+  }
+  @if(flash.containsKey("error")) {
+  <div class="well">
+    <div id="error-message" class="text-danger">
+      @flash.get("error")
+  </div>
+    </div>
+  }
+</div>
+
+}

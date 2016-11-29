@@ -1,0 +1,61 @@
+@import views.formdata.BusinessFormData
+@(businessForm: Form[BusinessFormData],
+        methods: Map[String, Boolean],
+        levels: List[String],
+        period: Map[String, Boolean],
+        majors: Map[String, Boolean])
+
+@import views.html.bootstrap3._
+
+<fieldset>
+        <!-- Header -->
+    <div id="legend">
+        <legend>Business Data</legend>
+    </div>
+
+        <!-- Name -->
+    @text(businessForm("name"),
+        label = "Name",
+        placeholder = "My Name",
+        help = "Please enter your first and last name. (required)")
+
+        <!-- Password -->
+    @password(businessForm("password"),
+        label = "Password",
+        placeholder = "",
+        help = "Password must be five or more characters. (required)")
+
+        <!-- Email -->
+    @text(businessForm("level"),
+        label = "Email",
+        placeholder = "Email",
+        help = "e.g. smith@example.com")
+
+        <!-- Methods -->
+    @checkboxes(businessForm("methods"),
+        label = "Method",
+        checkboxMap = methods,
+        help = "Check zero or more methods. (optional)")
+
+
+        <!-- Duration -->
+    @select(businessForm("period"),
+        label = "Duration",
+        optionMap = period,
+        isMultiple = false,
+        help = "Select your Duration. (required)")
+
+        <!-- Majors -->
+    @select(businessForm("majors"),
+        label = "Business Category",
+        optionMap = majors,
+        isMultiple = true,
+        help = "Select zero or more. (optional)")
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+            <button id="cancel" class="btn cancel">Cancel</button>
+        </div>
+    </div>
+</fieldset>
